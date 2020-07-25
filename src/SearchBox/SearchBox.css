@@ -1,0 +1,44 @@
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+.select-house {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.select-house label, select {
+   text-align: center;
+   margin: 0 auto;
+   margin-top: 10px;
+}
+.input-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.input-search button {
+    margin: 0 auto;
+    background-color: #A5290E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 5px;
+    min-width: 100px;
+}
+.input-search button:hover, .select-house select:hover {
+    cursor: pointer;
+}
+.input-search input {
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+fieldset {
+    width: 250px;
+    border: none;
+}

@@ -1,0 +1,7 @@
+.search-results {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    max-width: 960px;
+    margin: 0 auto;
+}
