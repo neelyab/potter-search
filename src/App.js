@@ -12,6 +12,10 @@ class App extends Component {
     }
   }
   handleSearch = (house, search) => {
+    // clear errors from previous searches
+    this.setState({
+      error: null
+    })
     // format url according to search and selections
     let url
     if (house === 'all' && search.length === 0) {
@@ -31,11 +35,10 @@ class App extends Component {
       return res.json()
     })
     .then(response => {
-      console.log(response)
       if (response.length === 0 ){
-        // perform a partial search for name
+        // perform a partial search for name if there are no results
         this.performPartialSearch(house, search)
-      }else {
+      } else {
         this.setState({
           results: response
         })
@@ -58,17 +61,23 @@ class App extends Component {
       return res.json()
     })
     .then(response => {
-     let results = [];
-     if (house === 'all') {
-       // filter characters by search term only
-      results = response.filter(char => {
-           return char.name.toLowerCase().includes(search.toLowerCase())
-          })
-     } else {
-      // filter characters by house and search term
-       results = response.filter(char => { 
-         return char.name.toLowerCase().includes(search.toLowerCase()) && char.house === house
-     })
+        let results = [];
+        if (house === 'all') {
+          // filter characters by search term only
+          results = response.filter(char => {
+              return char.name.toLowerCase().includes(search.toLowerCase())
+              })
+        } else {
+          // filter characters by house and search term
+          results = response.filter(char => { 
+            return char.name.toLowerCase().includes(search.toLowerCase()) && char.house === house
+        })
+    }
+    if(results.length === 0 ){
+      // if no results are present, set error message
+      this.setState({
+        error: 'no results found'
+      })
     }
     this.setState({
       results
@@ -86,7 +95,7 @@ class App extends Component {
       <main className='App'>
         <h1>Potter Search</h1>
         <SearchBox handleSearch={this.handleSearch} />
-        <p>{this.state.error && this.state.error}</p>
+        <p className="error">{this.state.error && this.state.error}</p>
         <SearchResults results = {this.state.results} />
 
       </main>
